@@ -1,22 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import React from 'react';
+import { useState } from 'react';
+import Homepage from './pages/Homepage';
+import Comments from './pages/Comments';
+import Specific from './pages/Specific';
+import General from './pages/General';
 
 function App() {
+  const [theRequest, settheRequest] = useState([]);
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <Router>  
+          <div className="App-header">
+          <Route path="/" exact>
+            <Homepage settheRequest={settheRequest}/>
+          </Route>
+          <Route path="/specific">
+            <Specific/>
+          </Route>
+          <Route path="/comments">
+            <Comments/>
+          </Route>
+          <Route path="/general" theRequest={theRequest}>
+            <General/>
+          </Route>
+          </div> 
+        </Router>
       </header>
     </div>
   );
